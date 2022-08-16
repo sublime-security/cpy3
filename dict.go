@@ -135,8 +135,3 @@ func PyDict_Next(p *PyObject, ppos *int, pkey, pvalue **PyObject) bool {
 
 	return res
 }
-
-//PyDict_ClearFreeList : https://docs.python.org/3/c-api/dict.html#c.PyDict_ClearFreeList
-func PyDict_ClearFreeList() int {
-	return int(C.PyDict_ClearFreeList())
-}

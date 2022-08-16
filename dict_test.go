@@ -90,7 +90,4 @@ func TestDict(t *testing.T) {
 	assert.Equal(t, 0, PyDict_Size(dict))
 
 	dict.DecRef()
-
-	PyDict_ClearFreeList()
-
 }

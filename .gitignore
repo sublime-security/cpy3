@@ -14,3 +14,4 @@ vendor
 
 # IDE config
 .vscode
+.idea

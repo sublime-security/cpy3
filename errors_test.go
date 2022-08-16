@@ -240,6 +240,8 @@ func TestErrorGetSetExcInfo(t *testing.T) {
 }
 
 func TestErrorInterrupt(t *testing.T) {
+	// https://docs.python.org/3/c-api/exceptions.html#c.PyErr_CheckSignals
+	t.Skip("PyErr_CheckSignals unconditionally returns 0 in embedded builds")
 	Py_Initialize()
 
 	PyErr_SetInterrupt()

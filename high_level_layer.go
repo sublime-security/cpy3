@@ -8,7 +8,7 @@ Copyright 2018 Datadog, Inc.
 package python3
 
 /*
-#cgo pkg-config: python3
+#cgo pkg-config: python-3.9-embed
 #include "Python.h"
 */
 import "C"

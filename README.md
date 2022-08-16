@@ -1,6 +1,6 @@
 # Go bindings for the CPython-3 C-API
 
-**Currently supports python-3.7 only.**
+**Currently supports python-3.9 only.**
 
 This package provides a ``go`` package named "python" under which most of the
 ``PyXYZ`` functions and macros of the public C-API of CPython have been
@@ -22,9 +22,16 @@ This project was inspired by [`sbinet/go-python`](https://github.com/sbinet/go-p
 
 ## Deps
 
-We will need `pkg-config` and a working `python3.7` environment to build these
+### macOS
+* Install brew
+* `brew install python@3.9`
+* `brew install pkg-config`
+* 
+
+### Linux
+We will need `pkg-config` and a working `python3.9` environment to build these
 bindings. Make sure you have Python libraries and header files installed as
-well (`python3.7-dev` on Debian or `python3-devel` on Centos for example)..
+well (`python3.9-dev` on Debian, `brew install python@3.9` on macOS, or `python3-devel` on Centos for example)..
 
 By default `pkg-config` will look at the `python3` library so if you want to
 choose a specific version just symlink `python-X.Y.pc` to `python3.pc` or use
