@@ -26,7 +26,6 @@ This project was inspired by [`sbinet/go-python`](https://github.com/sbinet/go-p
 * Install brew
 * `brew install python@3.9`
 * `brew install pkg-config`
-* 
 
 ### Linux
 We will need `pkg-config` and a working `python3.9` environment to build these
