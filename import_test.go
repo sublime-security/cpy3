@@ -124,6 +124,13 @@ func TestExecCodeModule(t *testing.T) {
 	module := PyImport_ExecCodeModule("test_module", code)
 	assert.NotNil(t, module)
 
+	testModuleStr := PyUnicode_FromString("test_module")
+	defer testModuleStr.DecRef()
+
+	pyModule := PyImport_GetModule(testModuleStr)
+	defer pyModule.DecRef()
+
+	assert.NotNil(t, pyModule)
 }
 
 func TestExecCodeModuleEx(t *testing.T) {
