@@ -8,7 +8,7 @@ Copyright 2018 Datadog, Inc.
 package python3
 
 /*
-#cgo pkg-config: python-3.9-embed
+#cgo pkg-config: python-3.10-embed
 #include "Python.h"
 */
 import "C"
@@ -17,7 +17,7 @@ import (
 	"unsafe"
 )
 
-//Py_Main : https://docs.python.org/3/c-api/veryhigh.html?highlight=pycompilerflags#c.Py_Main
+// Py_Main : https://docs.python.org/3/c-api/veryhigh.html?highlight=pycompilerflags#c.Py_Main
 // "error" will be set if we fail to call "Py_DecodeLocale" on every "args".
 func Py_Main(args []string) (int, error) {
 	argc := C.int(len(args))
@@ -38,7 +38,7 @@ func Py_Main(args []string) (int, error) {
 	return int(C.Py_Main(argc, (**C.wchar_t)(unsafe.Pointer(&argv[0])))), nil
 }
 
-//PyRun_AnyFile : https://docs.python.org/3/c-api/veryhigh.html?highlight=pycompilerflags#c.PyRun_AnyFile
+// PyRun_AnyFile : https://docs.python.org/3/c-api/veryhigh.html?highlight=pycompilerflags#c.PyRun_AnyFile
 // "error" will be set if we fail to open "filename".
 func PyRun_AnyFile(filename string) (int, error) {
 	cfilename := C.CString(filename)
@@ -57,7 +57,7 @@ func PyRun_AnyFile(filename string) (int, error) {
 	return int(C.PyRun_AnyFileFlags(cfile, cfilename, nil)), nil
 }
 
-//PyRun_SimpleString : https://docs.python.org/3/c-api/veryhigh.html?highlight=pycompilerflags#c.PyRun_SimpleString
+// PyRun_SimpleString : https://docs.python.org/3/c-api/veryhigh.html?highlight=pycompilerflags#c.PyRun_SimpleString
 func PyRun_SimpleString(command string) int {
 	ccommand := C.CString(command)
 	defer C.free(unsafe.Pointer(ccommand))
