@@ -35,7 +35,7 @@ func PyBytes_FromString(str string) *PyObject {
 	return togo(C.PyBytes_FromString(cstr))
 }
 
-// PyBytes_FromStringAndSize : https://docs.python.org/3/c-api/bytes.html#c.PyBytes_AsString
+// PyBytes_FromStringAndSize : https://docs.python.org/3/c-api/bytes.html#c.PyBytes_FromStringAndSize
 func PyBytes_FromStringAndSize(str string) *PyObject {
 	cstr := C.CString(str)
 	defer C.free(unsafe.Pointer(cstr))
@@ -70,4 +70,22 @@ func PyBytes_ConcatAndDel(bytes, newpart *PyObject) *PyObject {
 	cbytes := toc(bytes)
 	C.PyBytes_ConcatAndDel(&cbytes, toc(newpart))
 	return togo(cbytes)
+}
+
+// PyBytes_FromByteSlice uses https://docs.python.org/3/c-api/bytes.html#c.PyBytes_FromStringAndSize but with []byte
+func PyBytes_FromByteSlice(bytes []byte) *PyObject {
+	pbytes := C.CBytes(bytes)
+	defer C.free(pbytes)
+
+	cstr := (*C.char)(pbytes)
+
+	return togo(C.PyBytes_FromStringAndSize(cstr, C.Py_ssize_t(len(bytes))))
+}
+
+// PyBytes_AsByteSlice is equivalent to PyBytes_AsString but returns byte slices
+func PyBytes_AsByteSlice(o *PyObject) []byte {
+	cstr := C.PyBytes_AsString(toc(o))
+	size := C.PyBytes_Size(toc(o))
+
+	return C.GoBytes(unsafe.Pointer(cstr), C.int(size))
 }

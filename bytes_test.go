@@ -84,3 +84,19 @@ func TestBytesConcatAndDel(t *testing.T) {
 
 	assert.Equal(t, s1+s2, PyBytes_AsString(bytes1))
 }
+
+func TestByteSlices(t *testing.T) {
+	Py_Initialize()
+
+	s1 := []byte("aaaaaaaa")
+	s2 := []byte("bbbbbbbb")
+
+	bytes1 := PyBytes_FromByteSlice(s1)
+	defer bytes1.DecRef()
+
+	bytes2 := PyBytes_FromByteSlice(s2)
+	defer bytes2.DecRef()
+
+	assert.Equal(t, s1, PyBytes_AsByteSlice(bytes1))
+	assert.Equal(t, s2, PyBytes_AsByteSlice(bytes2))
+}
